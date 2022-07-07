@@ -84,6 +84,8 @@ public class C02BasicOutputMethod {
 		System.out.print("   *****\n");
 		System.out.print("    ***\n");
 		System.out.print("     *\n");
+		
+		System.out.println("GitHub TEST");
 	}
 
 }
