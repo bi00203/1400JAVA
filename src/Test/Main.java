@@ -1,4 +1,4 @@
-package JungTest;
+package Test;
 
 import java.util.Scanner;
 
@@ -8,13 +8,17 @@ public class Main {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		int n = sc.nextInt();
-		int i = 1;
-		while(i <= n)
+		int cnt = 0;
+		while(true)
 		{
-			System.out.printf("%d ",i);
-			i++;
+		int n = sc.nextInt();
+		if(n == 0)
+			break;
+		if(n % 3 == 0 || n % 5 == 0)
+			continue;
+		cnt++;
 		}
+		System.out.println(cnt);
 		
 		
 		
