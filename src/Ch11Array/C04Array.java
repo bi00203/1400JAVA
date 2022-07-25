@@ -36,10 +36,9 @@ public class C04Array {
 		
 		
 		// 4 각 열의 값의 총합을 따로 출력
-		for(int i = 0 ; i < arr[i].length ; i++) {
+		for(int i = 0 ; i < arr[0].length ; i++) {
 			for(int j = 0; j < arr.length ; j++) {
 				sum += arr[j][i];
-				System.out.printf("arr[%d][%d] ",j,i);
 			}
 			System.out.printf("%d열 합 : %d\n",i+1,sum);
 			sum = 0;
