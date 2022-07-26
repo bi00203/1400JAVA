@@ -56,25 +56,44 @@ class Refrigerator
 		//-Product 객체를 따로 만들어 수량 분배하여 리턴
 		// 만약 제품이 검색되고 수량이 저장된 수량과 같다면 list안의 내용물 삭제 후
 		// 제품 리턴
-		for(Product product : list)
-		{
-			if(search.equals(product.PName))
-			{
-				// 일치하는 제품이 있다면
-				if(product.amount < amount) // 요청 수량이 더 많을시
-					return null;
-				else if(product.amount == amount){ // 요청 수량 일치시
-					product = null;
-					return product;
-				}
-				else { // 저장된 제품이 더 많을 시
-				product.amount -= amount;
-				return new Product(search,amount);
-				}
+		if(ProductNum!=0)
+		{	
+			for(int i=0;i<ProductNum;i++) {
+				if(list[i].PName.equals(search))
+				{
+					//일치하는 제품이 있다면
+					
+					if(list[i].amount==amount)
+					{
+						
+						//재고량 == 요청수량
+						Product prod = list[i];
+						
+						//list에서 제품 삭제(자료구조..삭제처리 -> 컬렉션)
+						for(int j=i+1;j<ProductNum;j++) {
+							list[j-1]=list[j];
+						}
+						
+						list[ProductNum]=null;
+						//ProductNum--
+						ProductNum--;
+						//return Product 
+						return prod;
+					}
+					else if(list[i].amount>amount)
+					{
+						//재고량 > 요청수량
+						//list 수량 감소
+						list[i].amount = list[i].amount-amount;
+						//Product 객체를 생성
+						//Product 리턴
+						return new Product(list[i].PName,amount);
+					}		
+				}			
 			}
-			
 		}
-		// 일치하는 제품이 없다
+		
+		//일치하는 제품이 없다
 		return null;
 	}
 }
@@ -88,14 +107,19 @@ public class C05SingleTonMain {
 		
 		//상품정보객체 생성 
 		Product prod = new Product("콜라",5);
+		Product prod2 = new Product("사이다",5);
 		
 		//냉장고에 상품저장
 		refrigerator.SetProduct(prod);
+		refrigerator.SetProduct(prod2);
 
 		//냉장고에 상품반환
-		Product prod1 = refrigerator.GetProduct("사이다",1); 
+		Product prod1 = refrigerator.GetProduct("콜라",5); 
 				
 		System.out.println("get Item : " + prod1.toString());
+		for(int i=0;i<refrigerator.ProductNum;i++) {
+			System.out.println(refrigerator.list[i].toString());
+		}
 				
 	}
 
